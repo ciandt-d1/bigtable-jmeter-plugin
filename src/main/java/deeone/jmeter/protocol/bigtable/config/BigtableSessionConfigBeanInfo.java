@@ -19,6 +19,9 @@ public class BigtableSessionConfigBeanInfo extends BeanInfoSupport {
     public BigtableSessionConfigBeanInfo() {
         super(BigtableSessionConfig.class);
 
+        createPropertyGroup("bigtable_session_config",             //$NON-NLS-1$
+                new String[] { PROJECT_ID, INSTANCE_ID });
+
         PropertyDescriptor p = property(PROJECT_ID);
         p.setValue(NOT_UNDEFINED, Boolean.TRUE);
         p.setValue(DEFAULT, "");
@@ -29,9 +32,9 @@ public class BigtableSessionConfigBeanInfo extends BeanInfoSupport {
         p.setValue(DEFAULT, "");
         p.setValue(NOT_EXPRESSION, Boolean.TRUE);
 
-        p = property(DATA_CHANNEL_COUNT);
-        p.setValue(NOT_UNDEFINED, Boolean.TRUE);
-        p.setValue(DEFAULT, BigtableOptions.BIGTABLE_DATA_CHANNEL_COUNT_DEFAULT);
-        p.setValue(NOT_EXPRESSION, Boolean.TRUE);
+//        p = property(DATA_CHANNEL_COUNT);
+//        p.setValue(NOT_UNDEFINED, Boolean.TRUE);
+//        p.setValue(DEFAULT, null);
+//        p.setValue(NOT_EXPRESSION, Boolean.TRUE);
     }
 }

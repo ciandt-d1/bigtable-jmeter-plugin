@@ -4,10 +4,9 @@ import com.google.cloud.bigtable.config.BigtableOptions;
 import com.google.cloud.bigtable.config.RetryOptions;
 import com.google.cloud.bigtable.grpc.BigtableDataClient;
 import com.google.cloud.bigtable.grpc.BigtableSession;
-import org.apache.jmeter.config.ConfigElement;
+import org.apache.jmeter.config.ConfigTestElement;
 import org.apache.jmeter.testbeans.TestBean;
 import org.apache.jmeter.testbeans.TestBeanHelper;
-import org.apache.jmeter.testelement.AbstractTestElement;
 import org.apache.jmeter.testelement.TestStateListener;
 import org.apache.jmeter.threads.JMeterContextService;
 import org.apache.jmeter.threads.JMeterVariables;
@@ -17,22 +16,14 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 //http://codyaray.com/2014/07/custom-jmeter-samplers-and-config-elements
-public class BigtableSessionConfig extends AbstractTestElement
-        implements ConfigElement, TestStateListener, TestBean {
+public class BigtableSessionConfig extends ConfigTestElement
+        implements TestStateListener, TestBean {
 
     private static final Logger log = LoggerFactory.getLogger(BigtableSessionConfig.class);
-    private String projectId;
-    private String instanceId;
-    private Integer dataChannelCount;
+    private transient String projectId;
+    private transient String instanceId;
+    private transient Integer dataChannelCount;
     private transient BigtableSession session;
-
-    public void addConfigElement(ConfigElement configElement) {
-
-    }
-
-    public boolean expectsModification() {
-        return false;
-    }
 
     public void testStarted() {
         this.setRunningVersion(true);
@@ -98,28 +89,28 @@ public class BigtableSessionConfig extends AbstractTestElement
         }
     }
 
-    public synchronized String getProjectId() {
+    public String getProjectId() {
         return projectId;
     }
 
-    public synchronized  void setProjectId(String projectId) {
+    public void setProjectId(String projectId) {
         this.projectId = projectId;
     }
 
-    public synchronized  String getInstanceId() {
+    public String getInstanceId() {
         return instanceId;
     }
 
-    public synchronized  void setInstanceId(String instanceId) {
+    public void setInstanceId(String instanceId) {
         this.instanceId = instanceId;
     }
 
-    public synchronized Integer getDataChannelCount() {
-        return dataChannelCount;
-    }
-
-    public synchronized void setDataChannelCount(Integer dataChannelCount) {
-        this.dataChannelCount = dataChannelCount;
-    }
+//    public Integer getDataChannelCount() {
+//        return dataChannelCount;
+//    }
+//
+//    public void setDataChannelCount(Integer dataChannelCount) {
+//        this.dataChannelCount = dataChannelCount;
+//    }
 
 }
